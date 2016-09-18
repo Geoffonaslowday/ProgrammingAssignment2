@@ -1,34 +1,47 @@
 ## Put comments here that give an overall description of what your
-## functions do
+#the function put the inverse of a matrix into a cache state 
+#in the different environment using <<-, and then checks.  
 
-## Write a short comment describing this function
+## This is mostly the same as the example, except the mean reference is changed to matrix
+#the 'mean' function is changed to 'solve'
 
 makeCacheMatrix <- function(x = matrix()) {
   m <- NULL
-  set <- function(y) {
+  set <- function(y=matrix()) {
     x <<- y
     m <<- NULL
   }
   get <- function() x
-  setinverse <- function(solve) m <<- solve
-  getinverse <- function() m
+  setmatrix <- function(solve) m <<- solve
+  getmatrix <- function() m
   list(set = set, get = get,
-       setinverse = setinverse,
-       getinverse = getinverse)
+       setmatrix = setmatrix,
+       getmatrix = getmatrix)
 }
 
 
-## Write a short comment describing this function
+## Check the cache for the stored solution.  
+#if it is null, solve.  if it is there,  return it.
 
 cacheSolve <- function(x, ...) {
-  m <- x$getinverse()
+  m <- x$getmatrix()
   if(!is.null(m)) {
     message("getting cached data")
     return(m)
   }
   data <- x$get()
   m <- solve(data, ...)
-  x$setinverse(m)
+  x$setmatrix(m)
   m
         ## Return a matrix that is the inverse of 'x'
 }
+
+m1<-matrix(1:4,2,2)
+makeCacheMatrix(m1)
+thing<- makeCacheMatrix(m1)
+cacheSolve(thing)
+
+m2<-matrix(1:16,4,4)
+makeCacheMatrix(m2)
+thing<- makeCacheMatrix(m2)
+cacheSolve(thing)
