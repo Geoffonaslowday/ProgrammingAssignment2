@@ -1,6 +1,6 @@
 ## Put comments here that give an overall description of what your
 #the function put the inverse of a matrix into a cache state 
-#in the different environment using <<-, and then checks.  
+#in the parent environment using <<-, and then checks.  
 
 ## This is mostly the same as the example, except the mean reference is changed to matrix
 #the 'mean' function is changed to 'solve'
@@ -41,7 +41,14 @@ makeCacheMatrix(m1)
 thing<- makeCacheMatrix(m1)
 cacheSolve(thing)
 
-m2<-matrix(1:16,4,4)
-makeCacheMatrix(m2)
+m2<-matrix(c(1,2,3,5),2,2)
 thing<- makeCacheMatrix(m2)
+cacheSolve(thing)
+
+m3<-matrix(c(1,1,1,1),2,2) #doesn't work.  Singular
+thing<- makeCacheMatrix(m3)
+cacheSolve(thing)
+
+m4<-matrix(c(1,2,3,5,6,7,9,8,107),3,3)
+thing<- makeCacheMatrix(m4)
 cacheSolve(thing)
